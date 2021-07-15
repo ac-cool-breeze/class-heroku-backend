@@ -1,3 +1,5 @@
+// 20210715155155_migrate.js
+
 exports.up = function(knex) {
     return knex.schema.createTable('messages', table => {
       table.increments('id'); // adds an auto incrementing PK column
