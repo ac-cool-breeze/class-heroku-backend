@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 const knex = require('knex')
 
+/*
+require('knex')({
+  client: 'pg',
+  connection: 'postgres://user:pass@localhost:5432/dbname'
+})
+
+*/
+
 
 /* GET users listing. */
 
