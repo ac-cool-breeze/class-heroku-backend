@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const knex = require('knex')
+const knex = require('knex')({
+    client: 'pg',
+    connection: process.env.PG_CONNECTION_STRING,
+    searchPath: ['knex', 'public'],
+  });
 
 /*
 require('knex')({
