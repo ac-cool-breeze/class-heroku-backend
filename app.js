@@ -46,7 +46,7 @@ app.get('/', function(req, res) {
     .from('messages')
     .then(data => res.status(200).json(data))
     .catch(err =>
-      res.status(404).json({
+      res.status(500).json({
         message:
           'problemo'
       })

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:knew" :"npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run"
+    "start:knex": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
