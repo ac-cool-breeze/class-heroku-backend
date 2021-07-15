@@ -1,4 +1,4 @@
-// 20210715155155_migrate.js
+// 20210715155157_migrate.js
 
 exports.up = function(knex) {
     return knex.schema.createTable('messages', table => {
