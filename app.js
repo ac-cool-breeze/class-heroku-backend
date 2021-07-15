@@ -8,6 +8,7 @@ const knex = require('knex')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var messagesRouter = require('./routes/messages');
 
 var app = express();
 
