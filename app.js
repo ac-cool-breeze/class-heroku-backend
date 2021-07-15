@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const knex = require('knex')(require('./knexfile.js')['development']);
+//const knex = require('knex')(require('./knexfile.js')['production']);
+const knex = require('knex')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,21 +40,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-app.get('/messages', function(req, res) {
-  knex
-    .select('*')
-    .from('messages')
-    .then(data => res.status(200).json(data))
-    .catch(err =>
-      res.status(500).json({
-        message:
-          'problemo'
-      })
-    );
-});
-
-
 
 module.exports = app;

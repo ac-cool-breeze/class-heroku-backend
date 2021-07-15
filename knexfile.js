@@ -10,6 +10,23 @@ module.exports = {
     }
   },
 
+  //from docker checkpoint
+  // development: {
+  //   client: 'pg',
+  //   connection,
+  //   migrations: {
+  //     tableName: 'knex_migrations',
+  //     directory: path.join(__dirname, '/migrations'),
+  //   },
+  //   seeds: { directory: path.join(__dirname, '/seeds') },
+  // },
+
+  // from initial docker project
+  // development: {
+  //   client: 'pg',
+  //   connection: connection_string,
+  // },
+
   staging: {
     client: 'postgresql',
     connection: {
