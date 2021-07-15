@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV]);
+const knex = require('knex');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -40,7 +40,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.get('/', function(req, res) {
+app.get('/messages', function(req, res) {
   knex
     .select('*')
     .from('messages')
