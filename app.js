@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const knex = require('knex')(require('path/to/knexfile.js')[process.env.NODE_ENV]);
+const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV]);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
