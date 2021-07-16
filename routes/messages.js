@@ -38,11 +38,10 @@ router.get('/', function(req, res, next) {
 // takes username and message
 router.post('/postmessage', function(req,res,next){
   console.log('messages post:', req.body)
-
   let userId = getUserId(req.body.username)
   db('messages')
   .insert({ message : `${req.body.message}`})
-
+  .then(res.status(200))
 })
 
 module.exports = router;

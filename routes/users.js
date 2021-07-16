@@ -11,8 +11,12 @@ router.post('/newuser', function(req, res, next) {
   console.log(req.body)
   db('users')
   .insert({name: `${req.body.name}`, password: `${req.body.password}`})
-  .onConflict(res.send('Error on user create.').status(400))
-  .then(res.send('User created.').status(200))
+  .then(data => res.status(200).json(data))
+  .catch(err =>
+    res.status(500).json({
+      message: err
+    })
+  );
 })
 
 router.post('/login', function(req, res, next) {
@@ -20,7 +24,12 @@ router.post('/login', function(req, res, next) {
   db('users')
   .where({ name: `${req.body.name}`, password: `${req.body.password}`} )
   .select({name: `${req.body.name}`})
-  .then(res.status(200))
+  .then(data => res.status(200).json(data))
+  .catch(err =>
+    res.status(500).json({
+      message: err
+    })
+  );
 })
 
 module.exports = router;
