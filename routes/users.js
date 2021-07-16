@@ -37,7 +37,7 @@ router.post('/login', function(req, res, next) {
   .select('name')
   .then(data => {
     if(data[0].name){
-      res.cookie('username', `${req.body.name}`, { sameSite: 'none',domain: 'herokuapp.com' ,secure: true})
+      res.cookie('username', `${req.body.name}`)
       .send('Logged in')
       .status(200)
     } else {
@@ -45,11 +45,13 @@ router.post('/login', function(req, res, next) {
       .status(401)
     }
   })
-  .catch(err =>
-    res.status(500).json({
+  .catch(err => {
+    console.error('OUR ERROR',err)
+    res.status(502).json({
       message: err
-    })
-  );
+    })  
+  }
+);
 })
 
 module.exports = router;
