@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
-  origin: 'http://frontend.ionzing.space',
+  origin: 'http://frontend.ionizing.space',
   credentials: true
 }
 
