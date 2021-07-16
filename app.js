@@ -3,8 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//const knex = require('knex')(require('./knexfile.js')['production']);
-const knex = require('knex')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
