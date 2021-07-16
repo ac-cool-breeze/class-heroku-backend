@@ -11,8 +11,8 @@ router.post('/newuser', function(req, res, next) {
   console.log(req.body)
   db('users')
   .insert({name: `${req.body.name}`, password: `${req.body.password}`})
-  .onConflict(res.status(400).send('Error on user create.'))
-  .then(res.status(200).send('User created.'))
+  .onConflict(res.send('Error on user create.').status(400))
+  .then(res.send('User created.').status(200))
 })
 
 router.post('/login', function(req, res, next) {
