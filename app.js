@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
-  origin: 'https://class-heroku-frontend.herokuapp.com',
+  origin: 'http://localhost:3000',
   credentials: true
 }
 
