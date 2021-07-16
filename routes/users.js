@@ -36,7 +36,7 @@ router.post('/login', function(req, res, next) {
   .andWhere('password', req.body.password)
   .select('name')
   .then(data => {
-    if(data.rows > 0){
+    if(data.rows.length > 0){
       res.cookie('username', `${req.body.name}`)
       .send('Logged in')
       .status(200)
