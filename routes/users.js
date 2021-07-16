@@ -17,7 +17,10 @@ router.get('/', function(req, res, next) {
 router.post('/newuser', function(req, res, next) {
   console.log(req.body)
   db('users')
-  .insert({name: `${req.body.name}`, password: `${req.body.password}`})
+  .insert({
+    name: `${req.body.name}`, 
+    password: `${req.body.password}`
+  })
   .then(data => res.status(200).json(data))
   .catch(err =>
     res.status(500).json({
@@ -29,8 +32,11 @@ router.post('/newuser', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   console.log('/login hit:', req.body)
   db('users')
-  .where({ name: `${req.body.name}`, password: `${req.body.password}`} )
-  .select({name: `${req.body.name}`})
+  .where('name', req.body.name)
+  .andWhere('password', req.body.password)
+  .select({
+    name: `${req.body.name}`
+  })
   .then(data => res.status(200).json(data))
   .catch(err =>
     res.status(500).json({
