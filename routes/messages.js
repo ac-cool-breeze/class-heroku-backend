@@ -62,11 +62,11 @@ router.post('/postmessage', function(req,res,next){
     .returning('id')
     .then(messageId => {  // finally insert into the join table
       console.log('messageId: ', messageId[0])
-      console.log('userId: ', userId)
+      console.log('userId: ', userId[0].id)
       db('messages_users')
       .insert({ 
         messages_id: `${messageId[0]}`, 
-        users_id:`${userId}`
+        users_id:`${userId[0].id}`
       })
       .then(data => res.status(200).json(data))
       .catch(err =>
