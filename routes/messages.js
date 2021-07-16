@@ -57,7 +57,8 @@ router.post('/postmessage', function(req,res,next){
   })
   .returning('id')
   .then(messageId => {
-    console.log('messageId,userId:', messageId[0], userId)
+    console.log('messageId: ', messageId[0])
+    console.log('userId: ', userId)
     db('messages_users')
     .insert({ 
       messages_id: `${messageId[0]}`, 
