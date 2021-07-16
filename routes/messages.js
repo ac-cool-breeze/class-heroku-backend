@@ -50,26 +50,31 @@ router.get('/alljoin', function(req,res,next){
 // takes username and message
 router.post('/postmessage', function(req,res,next){
   console.log('messages post:', req.body)
-  let userId = getUserId(req.body.username)
-  db('messages')
-  .insert({ 
-    message : `${req.body.message}`
-  })
-  .returning('id')
-  .then(messageId => {
-    console.log('messageId: ', messageId[0])
-    console.log('userId: ', userId)
-    db('messages_users')
+
+  db('users')   // first select user id
+  .where({ username: `${username}`})
+  .select('id')
+  .then( userId => {  // then insert message returning the id
+    db('messages')
     .insert({ 
-      messages_id: `${messageId[0]}`, 
-      users_id:`${userId}`
+      message : `${req.body.message}`
     })
-    .then(data => res.status(200).json(data))
-    .catch(err =>
-      res.status(500).json({
-        message: err
+    .returning('id')
+    .then(messageId => {  // finally insert into the join table
+      console.log('messageId: ', messageId[0])
+      console.log('userId: ', userId)
+      db('messages_users')
+      .insert({ 
+        messages_id: `${messageId[0]}`, 
+        users_id:`${userId}`
       })
-    );
+      .then(data => res.status(200).json(data))
+      .catch(err =>
+        res.status(500).json({
+          message: err
+        })
+      );
+    })
   })
   
 })
