@@ -17,6 +17,12 @@ require('knex')({
 
 
 /* GET users listing. */
+const getUserId=(username)=>{
+  return (db('users')
+  .where({ username: `${username}`})
+  .select('id'))
+}
+
 
 router.get('/', function(req, res, next) {
     db.select('*')
@@ -28,5 +34,15 @@ router.get('/', function(req, res, next) {
         })
       );
   });
+
+// takes username and message
+router.post('/postmessage', function(req,res,next){
+  console.log('messages post:', req.body)
+
+  let userId = getUserId(req.body.username)
+  db('messages')
+  .insert({ message : `${req.body.message}`})
+
+})
 
 module.exports = router;
