@@ -15,14 +15,12 @@ require('knex')({
 
 */
 
-
 /* GET users listing. */
 const getUserId=(username)=>{
   return (db('users')
   .where({ username: `${username}`})
   .select('id'))
 }
-
 
 router.get('/', function(req, res, next) {
     db.select('*')
