@@ -4,7 +4,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('users', table => {
       table.increments('id'); // adds an auto incrementing PK column
-      table.string('name').notNullable();
+      table.string('name').unique().notNullable();
       table.string('password').notNullable();
     });
   };
