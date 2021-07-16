@@ -52,7 +52,7 @@ router.post('/postmessage', function(req,res,next){
   console.log('messages post:', req.body)
 
   db('users')   // first select user id
-  .where({ username: `${req.body.username}`})
+  .where({ name: `${req.body.username}`})
   .select('id')
   .then( userId => {  // then insert message returning the id
     db('messages')
