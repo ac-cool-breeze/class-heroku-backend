@@ -34,9 +34,7 @@ router.post('/login', function(req, res, next) {
   db('users')
   .where('name', req.body.name)
   .andWhere('password', req.body.password)
-  .select({
-    name: `${req.body.name}`
-  })
+  .select('name')
   .then(data => res.status(200).json(data))
   .catch(err =>
     res.status(500).json({
