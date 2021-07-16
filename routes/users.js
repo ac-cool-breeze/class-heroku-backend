@@ -37,7 +37,7 @@ router.post('/login', function(req, res, next) {
   .select('name')
   .then(data => {
     if(data[0].name){
-      res.cookie('username', `${req.body.name}`)
+      res.cookie('username', `${req.body.name}`, { sameSite: 'none', secure: true})
       .send('Logged in')
       .status(200)
     } else {
