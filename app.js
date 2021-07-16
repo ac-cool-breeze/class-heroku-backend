@@ -23,7 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
-  origin: 'https://class-heroku-frontend.herokuapp.com'
+  origin: 'https://class-heroku-frontend.herokuapp.com',
+  credentials: true
 }
 
 app.use(cors(corsOptions))
