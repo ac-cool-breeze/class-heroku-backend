@@ -52,12 +52,17 @@ router.post('/postmessage', function(req,res,next){
   console.log('messages post:', req.body)
   let userId = getUserId(req.body.username)
   db('messages')
-  .insert({ message : `${req.body.message}`})
+  .insert({ 
+    message : `${req.body.message}`
+  })
   .returning('id')
   .then(messageId => {
-    console.log('messageId:', messageId)
+    console.log('messageId,userId:', messageId[0], userId)
     db('messages_users')
-    .insert({ messages_id: messageId, users_id:userId})
+    .insert({ 
+      messages_id: `${messageId[0]}`, 
+      users_id:`${userId}`
+    })
     .then(data => res.status(200).json(data))
     .catch(err =>
       res.status(500).json({
