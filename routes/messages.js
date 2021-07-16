@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const knex = require('knex')/*({
+const db = require('../db')
+/*const knex = require('knex')({
     client: 'pg',
     connection: process.env.DATABASE_URL,
     searchPath: ['knex', 'public'],
-  });*/
+  });
 
 /*
 require('knex')({
@@ -18,8 +19,7 @@ require('knex')({
 /* GET users listing. */
 
 router.get('/', function(req, res, next) {
-    knex
-      .select('*')
+    db.select('*')
       .from('messages')
       .then(data => res.status(200).json(data))
       .catch(err =>
