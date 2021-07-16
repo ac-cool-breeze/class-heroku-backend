@@ -35,7 +35,16 @@ router.post('/login', function(req, res, next) {
   .where('name', req.body.name)
   .andWhere('password', req.body.password)
   .select('name')
-  .then(data => res.status(200).json(data))
+  .then(data => {
+    if(data.rows > 0){
+      res.cookie('username', `${req.body.name}`)
+      .send('Logged in')
+      .status(200)
+    } else {
+      res.send('Invalid credentials')
+      .status(401)
+    }
+  })
   .catch(err =>
     res.status(500).json({
       message: err
