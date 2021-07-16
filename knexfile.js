@@ -49,6 +49,7 @@ module.exports = {
       connectionString,
       ssl: {
         rejectUnauthorized: false,
+        require: false
       },
     },
     pool: {
