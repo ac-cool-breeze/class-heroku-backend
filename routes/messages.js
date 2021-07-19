@@ -54,6 +54,32 @@ router.get('/', function(req, res, next) {
       );
   });
 
+router.get('/dev', function(req, res, next) {
+    // get all from messages_user
+    // get username from users where id is in messages_user
+    // get message from messages where id is in messages_user
+    /*
+      SELECT users.name, messages.message FROM users
+      LEFT JOIN messages_user ON users.id = messages_user.user_id
+      LEFT JOIN messages ON messages.id = messages_user.message_id
+  */
+  
+
+      db.select('*')
+        .from('users')
+        .leftJoin('messages_user', 'users.id', 'messages_users.users_id' )
+        .then(data => res.status(200).json(data))
+        .catch(err =>
+          res.status(500).json({
+            message: err
+          })
+        );
+
+
+    });
+
+
+
 
 router.get('/alljoin', function(req,res,next){
   db.select('*')
