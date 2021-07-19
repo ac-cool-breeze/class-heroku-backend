@@ -34,24 +34,24 @@ router.get('/', function(req, res, next) {
     LEFT JOIN messages ON messages.id = messages_user.message_id
 */
 
-    db.select('users.name, messages.message')
-      .from('users')
-      .leftJoin('messages_user', 'users.id', 'messages_user.user_id' )
-      .then(data => res.status(200).json(data))
-      .catch(err =>
-        res.status(500).json({
-          message: err
-        })
-      );
-
-    // db.select('*')
-    //   .from('messages')
+    // db.select('users.name, messages.message')
+    //   .from('users')
+    //   .leftJoin('messages_user', 'users.id', 'messages_user.user_id' )
     //   .then(data => res.status(200).json(data))
     //   .catch(err =>
     //     res.status(500).json({
     //       message: err
     //     })
     //   );
+
+    db.select('*')
+      .from('messages')
+      .then(data => res.status(200).json(data))
+      .catch(err =>
+        res.status(500).json({
+          message: err
+        })
+      );
   });
 
 
