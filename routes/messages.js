@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
     db.from('messages_users')
     .leftJoin('messages', 'messages_users.messages_id', 'messages.id' )
     .leftJoin('users', 'messages_users.users_id', 'users.id')
-    .select('users.name','messages.message', 'messages.created_at')
+    .select('users.name','messages.message', 'messages.id', 'messages.created_at')
     .orderBy('messages.created_at', 'asc')
     .then(data => res.status(200).json(data))
     .catch(err =>
