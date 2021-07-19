@@ -24,49 +24,30 @@ const getUserId=(username)=>{
   )
 }
 
-router.get('/', function(req, res, next) {
-  // get all from messages_user
-  // get username from users where id is in messages_user
-  // get message from messages where id is in messages_user
-  /*
-    SELECT users.name, messages.message FROM users
-    LEFT JOIN messages_user ON users.id = messages_user.user_id
-    LEFT JOIN messages ON messages.id = messages_user.message_id
-*/
 
-    // db.select('users.name, messages.message')
-    //   .from('users')
-    //   .leftJoin('messages_user', 'users.id', 'messages_user.user_id' )
-    //   .then(data => res.status(200).json(data))
-    //   .catch(err =>
-    //     res.status(500).json({
-    //       message: err
-    //     })
-    //   );
+
+router.get('/', function(req, res, next) {
+
 
     db.from('messages_users')
     .leftJoin('messages', 'messages_users.messages_id', 'messages.id' )
     .leftJoin('users', 'messages_users.users_id', 'users.id')
     .select('users.name','messages.message', 'messages.created_at')
-    .orderBy('messages.created_at', 'desc')
+    .orderBy('messages.created_at', 'asc')
     .then(data => res.status(200).json(data))
     .catch(err =>
       res.status(500).json({
         message: err
       })
     );
+
+
   });
 
+
+
 router.get('/dev', function(req, res, next) {
-    // get all from messages_user
-    // get username from users where id is in messages_user
-    // get message from messages where id is in messages_user
-    /*
-      SELECT users.name, messages.message FROM users
-      LEFT JOIN messages_user ON users.id = messages_user.user_id
-      LEFT JOIN messages ON messages.id = messages_user.message_id
-  */
-  
+
 
       db.from('messages_users')
         .leftJoin('messages', 'messages_users.messages_id', 'messages.id' )
@@ -85,7 +66,6 @@ router.get('/dev', function(req, res, next) {
 
 
 
-
 router.get('/alljoin', function(req,res,next){
   db.select('*')
   .from('messages_users')
@@ -98,8 +78,11 @@ router.get('/alljoin', function(req,res,next){
 })
 
 
+
 // takes username and message
 router.post('/postmessage', function(req,res,next){
+
+
   console.log('messages post:', req.body)
 
   db('users')   // first select user id
@@ -128,6 +111,7 @@ router.post('/postmessage', function(req,res,next){
     })
   })
   
+
 })
 
 module.exports = router;
