@@ -65,9 +65,10 @@ router.get('/dev', function(req, res, next) {
   */
   
 
-      db.select('*').from('messages_users')
+      db.from('messages_users')
         .leftJoin('messages', 'messages_users.messages_id', 'messages.id' )
         .leftJoin('users', 'messages_users.users_id', 'users.id')
+        .select('users.name','messages.message')
         .then(data => res.status(200).json(data))
         .catch(err =>
           res.status(500).json({
